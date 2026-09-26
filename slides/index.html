@@ -126,7 +126,7 @@ a:focus-visible{outline:3px solid #0071e3;outline-offset:4px}
 @media(max-width:360px){.scale.o{zoom:.6}h1{font-size:38px}.cap3d h2{font-size:30px}.cap3d p{font-size:15px}}
 @media(max-height:650px) and (min-width:601px){.captions{top:45%;width:32vw;left:6vw;transform:translateY(-50%)}.cap3d,.cap3d.on{transform:translateY(-50%)}.cap3d h2{font-size:30px}.cap3d p{font-size:15px}#stage{inset:0 0 0 35%}.hint{bottom:22px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.cap3d{transition:none}.leg,.tail,.catbody{animation:none}}
-.filmwrap{margin-top:26px;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);background:#fff}
+.filmwrap{margin-top:26px;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.09);border:1px solid rgba(0,0,0,.07);background:#fff}
 .filmwrap video{display:block;width:100%;aspect-ratio:16/9}
 </style></head><body>
 
@@ -280,7 +280,7 @@ a:focus-visible{outline:3px solid #0071e3;outline-offset:4px}
 <script>
 const secs=[...document.querySelectorAll('section')],bg=document.getElementById('bg'),dots=document.getElementById('dots');
 secs.forEach((s,i)=>{s.id ||= `slide-${i+1}`;const a=document.createElement('a');a.href='#'+s.id;a.setAttribute('aria-label',s.querySelector('h1,h2')?.textContent || `Slide ${i+1}`);a.onclick=e=>{e.preventDefault();s.scrollIntoView()};dots.appendChild(a)});
-const says=['Scroll to unfold ↓','Hola! 👋','Hard to talk abroad…','Stand me up!','So many features ✨','Notes & tips 📝','Private & smart 🔒','Miau! 🐾'];
+const says=['Scroll to unfold ↓','Hola! 👋','Watch the demo ▶','Hard to talk abroad…','Stand me up!','So many features ✨','Notes & tips 📝','Private & smart 🔒','Miau! 🐾'];
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');const i=secs.indexOf(e.target);[...dots.children].forEach((d,j)=>{d.classList.toggle('on',j==i);if(j==i)d.setAttribute('aria-current','step');else d.removeAttribute('aria-current')});document.getElementById('say').textContent=says[i];}}),{rootMargin:'-45% 0px -45% 0px'});
 secs.forEach(s=>io.observe(s));
 const cat=document.querySelector('.catlane .cat');let last=scrollY,t;
