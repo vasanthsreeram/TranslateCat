@@ -1,0 +1,329 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05E18669BB510D1AA0F67E93 /* InnerConversationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55741390E742963BD3270499 /* InnerConversationView.swift */; };
+		1B11C79EE17D4C29ED6E255A /* ConversationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F28D89560AB422DAD84435 /* ConversationModel.swift */; };
+		39580CFF37ADEE2CB0DBED4F /* LiveSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C6E9E7551523A6B518CE9D /* LiveSpeech.swift */; };
+		50443B1BA830580D3D84A501 /* CameraPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F0A6D4700654D66276B3BF8 /* CameraPreview.swift */; };
+		7D405D023F9013DCFC65682A /* TranslateCatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B6CECDA5454DE648380051 /* TranslateCatApp.swift */; };
+		801556171413DB8DEA9735FC /* CoverTranscriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B995A37414F3445E7AD6B4 /* CoverTranscriptView.swift */; };
+		A3DE94E8C674729E7464C1CF /* AppLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60123EFE00D7B9F585A9A372 /* AppLanguage.swift */; };
+		AF12F73276C6B44C8668A1C7 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC884041AB78589E044FB1B0 /* Translator.swift */; };
+		EE5F360A71E2AA6DBF2727A6 /* CoverCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBBDEDAF996513A9866FA91A /* CoverCamera.swift */; };
+		F001A0000000000000000001 /* TravelChatModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001B0000000000000000001 /* TravelChatModel.swift */; };
+		F001A0000000000000000002 /* TravelChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001B0000000000000000002 /* TravelChatView.swift */; };
+		F001A0000000000000000003 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F001B0000000000000000003 /* Assets.xcassets */; };
+		F001A0000000000000000004 /* ConversationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F001B0000000000000000004 /* ConversationHistoryView.swift */; };
+		F002A0000000000000000001 /* GeminiTranslator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F002B0000000000000000001 /* GeminiTranslator.swift */; };
+		F003A0000000000000000001 /* AutoListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F003B0000000000000000001 /* AutoListener.swift */; };
+		F004A0000000000000000001 /* TranscriptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F004B0000000000000000001 /* TranscriptView.swift */; };
+		F005A0000000000000000001 /* ControlDeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F005B0000000000000000001 /* ControlDeckView.swift */; };
+		F006A0000000000000000001 /* RecapSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F006B0000000000000000001 /* RecapSummaryView.swift */; };
+		F007A0000000000000000001 /* ConversationRecapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F007B0000000000000000001 /* ConversationRecapView.swift */; };
+		F008A0000000000000000001 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = F008D0000000000000000001 /* RevenueCat */; };
+		F008A0000000000000000002 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = F008D0000000000000000002 /* RevenueCatUI */; };
+		F009A0000000000000000001 /* SubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009B0000000000000000001 /* SubscriptionModel.swift */; };
+		F009A0000000000000000002 /* ProUpsellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F009B0000000000000000002 /* ProUpsellView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+F010B0000000000000000001 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = SOURCE_ROOT; };
+		55741390E742963BD3270499 /* InnerConversationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InnerConversationView.swift; sourceTree = "<group>"; };
+		60123EFE00D7B9F585A9A372 /* AppLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLanguage.swift; sourceTree = "<group>"; };
+		85B995A37414F3445E7AD6B4 /* CoverTranscriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverTranscriptView.swift; sourceTree = "<group>"; };
+		929722BA20E1F66B3220EB9E /* TranslateCat.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = TranslateCat.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F0A6D4700654D66276B3BF8 /* CameraPreview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreview.swift; sourceTree = "<group>"; };
+		B9F28D89560AB422DAD84435 /* ConversationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationModel.swift; sourceTree = "<group>"; };
+		BC884041AB78589E044FB1B0 /* Translator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Translator.swift; sourceTree = "<group>"; };
+		C2C6E9E7551523A6B518CE9D /* LiveSpeech.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveSpeech.swift; sourceTree = "<group>"; };
+		CBBDEDAF996513A9866FA91A /* CoverCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverCamera.swift; sourceTree = "<group>"; };
+		D0B6CECDA5454DE648380051 /* TranslateCatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateCatApp.swift; sourceTree = "<group>"; };
+		F001B0000000000000000001 /* TravelChatModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelChatModel.swift; sourceTree = "<group>"; };
+		F001B0000000000000000002 /* TravelChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelChatView.swift; sourceTree = "<group>"; };
+		F001B0000000000000000003 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F001B0000000000000000004 /* ConversationHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationHistoryView.swift; sourceTree = "<group>"; };
+		F002B0000000000000000001 /* GeminiTranslator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiTranslator.swift; sourceTree = "<group>"; };
+		F003B0000000000000000001 /* AutoListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoListener.swift; sourceTree = "<group>"; };
+		F004B0000000000000000001 /* TranscriptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranscriptView.swift; sourceTree = "<group>"; };
+		F005B0000000000000000001 /* ControlDeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlDeckView.swift; sourceTree = "<group>"; };
+		F006B0000000000000000001 /* RecapSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecapSummaryView.swift; sourceTree = "<group>"; };
+		F007B0000000000000000001 /* ConversationRecapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationRecapView.swift; sourceTree = "<group>"; };
+		F009B0000000000000000001 /* SubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionModel.swift; sourceTree = "<group>"; };
+		F009B0000000000000000002 /* ProUpsellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProUpsellView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F008C0000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F008A0000000000000000001 /* RevenueCat in Frameworks */,
+				F008A0000000000000000002 /* RevenueCatUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		91CC3F8E82E90429834427D2 = {
+			isa = PBXGroup;
+			children = (
+				A8C4FB0CFC8894EEF597577B /* TranslateCat */,
+				C78A193CA585209D0AA98BB2 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A8C4FB0CFC8894EEF597577B /* TranslateCat */ = {
+			isa = PBXGroup;
+			children = (
+				60123EFE00D7B9F585A9A372 /* AppLanguage.swift */,
+				9F0A6D4700654D66276B3BF8 /* CameraPreview.swift */,
+				B9F28D89560AB422DAD84435 /* ConversationModel.swift */,
+				CBBDEDAF996513A9866FA91A /* CoverCamera.swift */,
+				85B995A37414F3445E7AD6B4 /* CoverTranscriptView.swift */,
+				55741390E742963BD3270499 /* InnerConversationView.swift */,
+				C2C6E9E7551523A6B518CE9D /* LiveSpeech.swift */,
+				D0B6CECDA5454DE648380051 /* TranslateCatApp.swift */,
+				BC884041AB78589E044FB1B0 /* Translator.swift */,
+				F001B0000000000000000001 /* TravelChatModel.swift */,
+				F007B0000000000000000001 /* ConversationRecapView.swift */,
+				F006B0000000000000000001 /* RecapSummaryView.swift */,
+				F005B0000000000000000001 /* ControlDeckView.swift */,
+				F004B0000000000000000001 /* TranscriptView.swift */,
+				F003B0000000000000000001 /* AutoListener.swift */,
+				F002B0000000000000000001 /* GeminiTranslator.swift */,
+				F009B0000000000000000001 /* SubscriptionModel.swift */,
+				F009B0000000000000000002 /* ProUpsellView.swift */,
+				F001B0000000000000000002 /* TravelChatView.swift */,
+				F001B0000000000000000003 /* Assets.xcassets */,
+				F001B0000000000000000004 /* ConversationHistoryView.swift */,
+			);
+			path = TranslateCat;
+			sourceTree = "<group>";
+		};
+		C78A193CA585209D0AA98BB2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				929722BA20E1F66B3220EB9E /* TranslateCat.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		42E33F33EB48C2312474171D /* TranslateCat */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6C7C047A0092345BC24E4197 /* Build configuration list for PBXNativeTarget "TranslateCat" */;
+			buildPhases = (
+				E924A1EF8B16B31567A7241C /* Sources */,
+				F008C0000000000000000001 /* Frameworks */,
+				F001C0000000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TranslateCat;
+			packageProductDependencies = (
+				F008D0000000000000000001 /* RevenueCat */,
+				F008D0000000000000000002 /* RevenueCatUI */,
+			);
+			productName = TranslateCat;
+			productReference = 929722BA20E1F66B3220EB9E /* TranslateCat.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0372300EBB8EBC0F7C64BC50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = CCF36206F603D78DF577704A /* Build configuration list for PBXProject "TranslateCat" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 91CC3F8E82E90429834427D2;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				F008E0000000000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C78A193CA585209D0AA98BB2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				42E33F33EB48C2312474171D /* TranslateCat */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F001C0000000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F001A0000000000000000003 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E924A1EF8B16B31567A7241C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3DE94E8C674729E7464C1CF /* AppLanguage.swift in Sources */,
+				50443B1BA830580D3D84A501 /* CameraPreview.swift in Sources */,
+				1B11C79EE17D4C29ED6E255A /* ConversationModel.swift in Sources */,
+				EE5F360A71E2AA6DBF2727A6 /* CoverCamera.swift in Sources */,
+				801556171413DB8DEA9735FC /* CoverTranscriptView.swift in Sources */,
+				05E18669BB510D1AA0F67E93 /* InnerConversationView.swift in Sources */,
+				39580CFF37ADEE2CB0DBED4F /* LiveSpeech.swift in Sources */,
+				7D405D023F9013DCFC65682A /* TranslateCatApp.swift in Sources */,
+				AF12F73276C6B44C8668A1C7 /* Translator.swift in Sources */,
+				F001A0000000000000000001 /* TravelChatModel.swift in Sources */,
+				F007A0000000000000000001 /* ConversationRecapView.swift in Sources */,
+				F006A0000000000000000001 /* RecapSummaryView.swift in Sources */,
+				F005A0000000000000000001 /* ControlDeckView.swift in Sources */,
+				F004A0000000000000000001 /* TranscriptView.swift in Sources */,
+				F003A0000000000000000001 /* AutoListener.swift in Sources */,
+				F002A0000000000000000001 /* GeminiTranslator.swift in Sources */,
+				F009A0000000000000000001 /* SubscriptionModel.swift in Sources */,
+				F009A0000000000000000002 /* ProUpsellView.swift in Sources */,
+				F001A0000000000000000002 /* TravelChatView.swift in Sources */,
+				F001A0000000000000000004 /* ConversationHistoryView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2F21FD695C87AC5B0864E166 /* Debug */ = {
+			isa = XCBuildConfiguration;
+baseConfigurationReference = F010B0000000000000000001 /* Config.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TranslateCat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.bitrighackyc.translatecat;
+				PRODUCT_NAME = TranslateCat;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		4B1349440CCCC829B7E9881D /* Release */ = {
+			isa = XCBuildConfiguration;
+baseConfigurationReference = F010B0000000000000000001 /* Config.xcconfig */;
+			buildSettings = {
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = TranslateCat/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = app.bitrighackyc.translatecat;
+				PRODUCT_NAME = TranslateCat;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		897A9D82F883A474E2F89645 /* Debug */ = {
+			isa = XCBuildConfiguration;
+baseConfigurationReference = F010B0000000000000000001 /* Config.xcconfig */;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 27.1;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		CDFC7FAF85F544FEADFC164C /* Release */ = {
+			isa = XCBuildConfiguration;
+baseConfigurationReference = F010B0000000000000000001 /* Config.xcconfig */;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 27.1;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6C7C047A0092345BC24E4197 /* Build configuration list for PBXNativeTarget "TranslateCat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F21FD695C87AC5B0864E166 /* Debug */,
+				4B1349440CCCC829B7E9881D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CCF36206F603D78DF577704A /* Build configuration list for PBXProject "TranslateCat" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				897A9D82F883A474E2F89645 /* Debug */,
+				CDFC7FAF85F544FEADFC164C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F008E0000000000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.91.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F008D0000000000000000001 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F008E0000000000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
+		F008D0000000000000000002 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F008E0000000000000000001 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 0372300EBB8EBC0F7C64BC50 /* Project object */;
+}

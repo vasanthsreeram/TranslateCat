@@ -1,0 +1,12 @@
+.DS_Store
+Secrets.xcconfig
+.env
+.env.*
+.dev.vars*
+.wrangler/
+node_modules/
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+videos/

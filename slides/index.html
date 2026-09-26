@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TranslateCat for iPhone Duo</title>
+<style>
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:64px;color-scheme:light}
+:root{--page:#f5f5f7;--ink:#1d1d1f;--muted:#626268;--accent:#2e5a4a;--line:#dedee3}
+body{font-family:-apple-system,"SF Pro Display",system-ui,sans-serif;color:var(--ink);background:var(--page);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.bg{display:none}
+.masthead{position:fixed;inset:0 0 auto;height:60px;z-index:12;background:rgba(255,255,255,.86);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid rgba(0,0,0,.08);display:flex;align-items:center;justify-content:space-between;padding:0 max(6vw,24px)}
+.masthead a{color:var(--ink);text-decoration:none;font-size:20px;font-weight:650;letter-spacing:-.6px}
+.masthead span{font-size:12px;color:var(--muted)}
+section{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:110px 7vw 130px;position:relative}
+section:nth-of-type(even){background:#fff}
+.glass{background:#fff;border:1px solid rgba(0,0,0,.055);border-radius:32px;box-shadow:0 12px 48px rgba(0,0,0,.035);padding:clamp(28px,4.5vw,64px);max-width:1240px;width:100%}
+section:nth-of-type(even)>.glass{background:#f5f5f7;border-color:transparent;box-shadow:none}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.in .reveal{opacity:1;transform:none}
+.in .d1{transition-delay:.08s}.in .d2{transition-delay:.16s}.in .d3{transition-delay:.24s}
+h1{font-size:clamp(44px,6vw,84px);font-weight:700;letter-spacing:-.065em;line-height:1.05;color:var(--ink);overflow-wrap:anywhere}
+h2{font-size:clamp(32px,4vw,56px);font-weight:650;letter-spacing:-.045em;margin-bottom:20px;line-height:1.08;text-wrap:balance}
+p,li{font-size:20px;line-height:1.55;color:var(--muted);letter-spacing:-.025em}
+p b,li b{color:var(--ink);font-weight:600}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:18px;font-weight:650}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:36px}
+.card{background:#f5f5f7;border:1px solid rgba(0,0,0,.035);border-radius:24px;padding:28px}
+.card b{display:block;font-size:20px;letter-spacing:-.025em;margin:18px 0 10px;color:var(--ink)}.card svg{width:28px;height:28px;color:var(--accent)}.card p{font-size:17px;line-height:1.5}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:48px;align-items:center}.split>*{min-width:0}
+.pill{display:inline-block;padding:9px 16px;border-radius:99px;background:#eaf0ec;border:1px solid #dce6df;color:var(--accent);margin:6px 6px 0 0;font-size:14px;font-weight:500}
+.photo{display:block;width:100%;border-radius:22px;background:#fff;box-shadow:0 10px 28px rgba(0,0,0,.055)}
+.cap{font-size:12px;color:var(--muted);text-align:center;margin-top:16px;line-height:1.5}
+@media(max-width:1000px){.split{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ===== iPhone Duo hardware ===== */
+.frame{position:relative;background:linear-gradient(135deg,#e9e6df,#a9a59c 40%,#f4f2ec 60%,#8f8b82);padding:5px;box-shadow:0 24px 48px rgba(0,0,0,.14)}
+.frame .glassbez{background:#050505;padding:7px;height:100%}
+.frame .disp{height:100%;overflow:hidden;position:relative}
+.inner{width:640px;height:500px;border-radius:44px}
+.inner .glassbez{border-radius:40px}.inner .disp{border-radius:33px}
+.inner .hinge{position:absolute;left:50%;top:0;bottom:0;width:18px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(0,0,0,.05) 40%,rgba(255,255,255,.35) 50%,rgba(0,0,0,.06) 60%,transparent);pointer-events:none;z-index:4}
+.outer{width:340px;height:460px;border-radius:26px 64px 64px 26px}
+.outer .glassbez{border-radius:22px 60px 60px 22px}.outer .disp{border-radius:16px 53px 53px 16px}
+.outer .cam{position:absolute;top:14px;right:16px;width:24px;height:24px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2b3550,#000 60%);z-index:5;box-shadow:0 0 0 2px #111}
+.btnside{position:absolute;background:#bdb9b0;border-radius:3px}
+.devices{display:flex;gap:34px;align-items:center;justify-content:center;flex-wrap:wrap}
+.devlabel{text-align:center;margin-top:14px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.scale{transform-origin:center;}
+@media(max-width:1300px){.scale.i{zoom:.8}.scale.o{zoom:.8}}
+
+/* ===== native app UI (TranslateCat theme) ===== */
+.app{--accent:#2e5a4a;--canvas:#f2ede0;--surface:#fcfaf2;--ink:#293329;--muted:#636b5e;--rule:#d1ccba;background:var(--canvas);color:var(--ink);height:100%;font-family:-apple-system,"SF Pro Text",system-ui;position:relative}
+.serif{font-family:"New York","Iowan Old Style",Georgia,serif;font-weight:500}
+/* vertical system rail (landscape inner / outer display) */
+.rail{position:absolute;right:10px;top:12px;bottom:12px;width:50px;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:3}
+.status{font-size:12px;font-weight:600;text-align:center;line-height:1.3}
+.lg{background:rgba(255,255,255,.55);backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);border:.5px solid rgba(255,255,255,.9);box-shadow:0 6px 18px rgba(0,0,0,.1),inset 0 1px 0 #fff;border-radius:26px;display:flex;flex-direction:column;align-items:center;padding:6px 0;gap:2px}
+.lg i{width:40px;height:40px;display:grid;place-items:center;color:var(--ink);border-radius:20px}
+.lg i svg{width:20px;height:20px}
+.lg i.tap{animation:tap 1s}
+@keyframes tap{30%{background:rgba(46,90,74,.2);transform:scale(.88)}}
+.navtitle{position:absolute;top:16px;left:0;right:62px;text-align:center;font-weight:600;font-size:15px;display:flex;justify-content:center;gap:6px;align-items:center}
+.navtitle svg{width:17px;height:17px}
+.cards{position:absolute;top:46px;left:14px;right:70px;bottom:14px;display:flex;flex-direction:column;gap:10px}
+.scard{flex:1;background:var(--surface);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;transition:border .3s}
+.scard.active{border:2px solid var(--accent)}
+.kicker{font-size:10.5px;font-weight:700;letter-spacing:.12em;color:var(--accent);display:flex;gap:6px;align-items:center}
+.kicker svg{width:13px;height:13px}
+.big{font-size:23px;line-height:1.2;min-height:28px}
+.ph{color:var(--muted)}
+.foot{margin-top:auto;font-size:12px;color:var(--accent);display:flex;gap:6px;align-items:center}
+.foot svg{width:14px;height:14px}
+.cta{background:var(--accent);color:var(--surface);border-radius:12px;padding:10px;text-align:center;font-weight:600;font-size:15px;display:flex;gap:8px;justify-content:center;align-items:center}
+.cta svg{width:16px;height:16px}
+.caret::after{content:"";display:inline-block;width:2px;height:.9em;background:var(--accent);margin-left:3px;vertical-align:-2px;animation:blink 1s infinite}
+@keyframes blink{50%{opacity:0}}
+.wave i{display:inline-block;width:3px;height:10px;background:var(--accent);margin-right:2px;border-radius:2px;animation:wv .8s infinite alternate}
+.wave i:nth-child(2){animation-delay:.2s}.wave i:nth-child(3){animation-delay:.4s}.wave i:nth-child(4){animation-delay:.1s}
+@keyframes wv{to{height:3px}}
+/* cover */
+.cover{background:var(--surface);padding:28px 70px 28px 26px;display:flex;flex-direction:column;gap:18px}
+.cover .big{font-size:40px;line-height:1.12;flex:1}
+/* sheets */
+.sheet{position:absolute;inset:40px 8px 0 8px;background:#fff;border-radius:22px 22px 0 0;box-shadow:0 -4px 30px rgba(0,0,0,.15);padding:14px 16px;color:#1c1c1e}
+.sheet h4{font-size:17px;text-align:center;margin-bottom:12px}
+.row{background:#f2f2f7;border-radius:12px;padding:11px 13px;margin-bottom:8px;font-size:13.5px}
+.row small{display:block;color:#8e8e93;font-size:11.5px;margin-top:2px}
+.msg{max-width:80%;padding:9px 12px;border-radius:18px;font-size:13px;margin-bottom:8px;line-height:1.35}
+.msg.u{margin-left:auto;background:#2e5a4a;color:#fff}.msg.a{background:#f2f2f7}
+.lbl{font-size:10px;letter-spacing:.1em;font-weight:700;color:#8e8e93;margin:4px 2px}
+
+/* cat */
+.catlane{position:fixed;bottom:14px;left:0;width:100%;height:80px;pointer-events:none;z-index:5}
+.cat{position:absolute;bottom:0;left:0;width:110px;transition:left .15s linear}
+.cat svg{width:100%;overflow:visible}
+.leg{transform-box:fill-box;transform-origin:top center;animation:walk .4s infinite alternate ease-in-out}.leg.b{animation-delay:.2s}
+.tail{transform-box:fill-box;transform-origin:left bottom;animation:tailw 1.2s infinite alternate ease-in-out}
+.catbody{animation:bob .4s infinite alternate}
+@keyframes walk{from{transform:rotate(25deg)}to{transform:rotate(-25deg)}}
+@keyframes tailw{from{transform:rotate(-15deg)}to{transform:rotate(20deg)}}
+@keyframes bob{to{transform:translateY(-2px)}}
+.cat.idle .leg,.cat.idle .catbody{animation-play-state:paused}
+.cat.flip svg{transform:scaleX(-1)}
+.speech{position:absolute;bottom:74px;left:0;max-width:180px;font-size:12px;line-height:1.4;padding:9px 14px;border-radius:16px;background:rgba(255,255,255,.95);color:var(--ink);box-shadow:0 4px 20px rgba(0,0,0,.07);border:1px solid var(--line)}
+.progress{position:fixed;top:0;left:0;height:3px;background:var(--accent);z-index:14;width:0}
+.dots{position:fixed;right:14px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:4px;z-index:10;padding:8px 3px;border-radius:24px;background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid rgba(0,0,0,.06)}
+.dots a{width:24px;height:24px;display:grid;place-items:center;border-radius:50%}.dots a::after{content:"";width:6px;height:6px;border-radius:6px;background:#acadb1;transition:.25s}.dots a.on::after{background:var(--accent);height:17px}
+a:focus-visible{outline:3px solid #0071e3;outline-offset:4px}
+#stage3d{display:block;height:500vh;padding:0;background:radial-gradient(ellipse at 70% 40%,#fff 10%,#f5f5f7 75%)}
+#stage3d .sticky{position:sticky;top:0;height:100vh;overflow:hidden}
+#stage{position:absolute;inset:0;opacity:0;transition:opacity 1s}#stage.ready{opacity:1}
+#stage canvas{display:block}
+.captions{position:absolute;left:7vw;top:50%;transform:translateY(-50%);width:min(380px,32vw);z-index:2}
+.cap3d{position:absolute;top:0;transform:translateY(-50%) translateX(-20px);opacity:0;padding:0;background:transparent;border:0;box-shadow:none;transition:opacity .5s,transform .7s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.cap3d.on{opacity:1;transform:translateY(-50%)}
+.cap3d h2{font-size:clamp(34px,4vw,58px);letter-spacing:-.055em}.cap3d p{font-size:19px;max-width:340px}.cap3d .eyebrow{margin-bottom:20px}
+.hint{position:absolute;bottom:42px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+@media(max-width:900px){
+ .captions{left:7vw;right:7vw;width:auto;top:100px;transform:none}.cap3d,.cap3d.on{transform:none}.cap3d h2{font-size:36px;max-width:460px}.cap3d p{font-size:17px;max-width:420px}.cap3d .eyebrow{margin-bottom:12px}
+ #stage{top:34%;bottom:75px}.dots{right:5px}.cat{width:80px}.speech{bottom:55px;font-size:11px;max-width:130px}
+}
+@media(max-width:600px){
+ section{padding:88px 24px 120px;min-height:100svh}.glass{padding:28px 22px;border-radius:24px}.split{gap:28px}.grid{grid-template-columns:1fr;gap:12px}.card{padding:24px}.devices{gap:32px}.scale.o{zoom:.7}.scale.i{zoom:.4}
+ p,li{font-size:17px}h1{font-size:44px}h2{font-size:34px}.masthead{padding:0 24px}.masthead a{font-size:18px}.masthead span{font-size:11px}.dots{padding:6px 0}.dots a{width:18px;height:22px}.dots a::after{width:5px;height:5px}
+ .captions{left:24px;right:32px;top:94px}.cap3d{padding:0}.cap3d h2{font-size:34px;margin-bottom:12px}.cap3d p{font-size:16px}.hint{bottom:35px;font-size:10px}
+}
+@media(max-width:360px){.scale.o{zoom:.6}h1{font-size:38px}.cap3d h2{font-size:30px}.cap3d p{font-size:15px}}
+@media(max-height:650px) and (min-width:601px){.captions{top:45%;width:32vw;left:6vw;transform:translateY(-50%)}.cap3d,.cap3d.on{transform:translateY(-50%)}.cap3d h2{font-size:30px}.cap3d p{font-size:15px}#stage{inset:0 0 0 35%}.hint{bottom:22px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.cap3d{transition:none}.leg,.tail,.catbody{animation:none}}
+.filmwrap{margin-top:26px;border-radius:24px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.25);background:#fff}
+.filmwrap video{display:block;width:100%;aspect-ratio:16/9}
+</style></head><body>
+
+<!-- SF Symbol–style icons -->
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="cat" viewBox="0 0 24 24"><path fill="currentColor" d="M4 3l4 4.2a9 9 0 0 1 8 0L20 3v9.5A8 8 0 0 1 12 21a8 8 0 0 1-8-8.5z"/><circle cx="9" cy="12.5" r="1.2" fill="#fcfaf2"/><circle cx="15" cy="12.5" r="1.2" fill="#fcfaf2"/></symbol>
+<symbol id="book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M5 4h11a2 2 0 0 1 2 2v14H7a2 2 0 0 1-2-2zM5 18a2 2 0 0 1 2-2h11M9 8h5"/></symbol>
+<symbol id="sparkles" viewBox="0 0 24 24"><path fill="currentColor" d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8zM18 14l.9 2.1L21 17l-2.1.9L18 20l-.9-2.1L15 17l2.1-.9z"/></symbol>
+<symbol id="globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></g></symbol>
+<symbol id="keyboard" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6 10h1M9.5 10h1M13 10h1M16.5 10h1M8 14h8"/></g></symbol>
+<symbol id="mic" viewBox="0 0 24 24"><g fill="currentColor"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M6 11a6 6 0 0 0 12 0" fill="none" stroke="currentColor" stroke-width="1.8"/><rect x="11.1" y="17" width="1.8" height="4"/></g></symbol>
+<symbol id="stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></symbol>
+<symbol id="waveform" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 10v4M8 7v10M12 4v16M16 7v10M20 10v4"/></symbol>
+<symbol id="bubble" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 5h16v11H10l-4 3v-3H4zM8 9h8M8 12h5"/></symbol>
+<symbol id="ear" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M7 9a5 5 0 0 1 10 0c0 3-3 4-3 7a3 3 0 0 1-5 2M10 9a2 2 0 0 1 4 0"/></symbol>
+<symbol id="wifi" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M3 9a13 13 0 0 1 18 0M6 12.5a8.5 8.5 0 0 1 12 0M9 16a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r="1.3" fill="currentColor"/></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></g></symbol>
+<symbol id="speaker" viewBox="0 0 24 24"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11"/></symbol>
+</defs></svg>
+
+<header class="masthead"><a href="#stage3d">TranslateCat</a><span>Built for iPhone Duo</span></header>
+<div class="progress" id="prog"></div><div class="bg" id="bg"></div><nav class="dots" id="dots" aria-label="Presentation sections"></nav>
+
+<!-- 4 3D demo -->
+<section id="stage3d" data-bg="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1920&q=80">
+ <div class="sticky">
+  <div id="stage"></div>
+  <div class="captions">
+   <div class="glass cap3d" data-phase="0,0.13"><div class="eyebrow">TranslateCat for iPhone Duo</div><h2>Two displays.<br>One conversation.</h2><p>Your phone becomes a face-to-face interpreter. Scroll to unfold it and see both sides of the conversation.</p></div>
+   <div class="glass cap3d" data-phase="0.13,0.33"><div class="eyebrow">Unfold · 7.6″ inner display</div><h2>Open it up.</h2><p>TranslateCat fills the big inner display: their translation on top, your words below.</p></div>
+   <div class="glass cap3d" data-phase="0.33,0.57"><div class="eyebrow">Laptop pose · your side</div><h2>Stand it on the table.</h2><p>Tap <b>Start conversation</b> and just talk. Your English types in live and becomes Spanish.</p></div>
+   <div class="glass cap3d" data-phase="0.57,0.84"><div class="eyebrow">Outer display · their side</div><h2>They get their own screen.</h2><p>The outer display faces the other person with big Spanish captions, typed in as you speak. When they reply, “Escuchando…” shows it's listening.</p></div>
+   <div class="glass cap3d" data-phase="0.84,1.01"><div class="eyebrow">One device, two people</div><h2>No passing the phone back and forth.</h2><p>Both people see the whole conversation, in their own language, at the same time.</p></div>
+  </div>
+  <div class="hint">Scroll to rotate ↓</div>
+ </div>
+</section>
+
+<!-- 1 Title -->
+<section data-bg="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=1920&q=80">
+ <div class="glass split">
+  <div>
+   <div class="eyebrow reveal">Built for iPhone Duo</div>
+   <h1 class="reveal d1">TranslateCat</h1>
+   <p class="reveal d2" style="font-size:24px;margin-top:14px">Open your iPhone Duo and it becomes a two‑sided live interpreter. You read one screen. They read the other.</p>
+   <p class="reveal d3" style="margin-top:26px;font-size:15px;opacity:.6">Scroll to follow the cat ↓</p>
+  </div>
+  <div class="reveal d2"><img class="photo" src="img/hero.jpg" alt="iPhone Duo opened, held in two hands"><div class="cap">iPhone Duo · 7.6″ inner · 5.4″ outer display</div></div>
+ </div></section>
+
+<!-- 1b Launch film -->
+<section id="film" data-bg="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1920&q=80">
+ <div class="glass" style="max-width:1320px;text-align:center">
+  <div class="eyebrow reveal">The launch film</div>
+  <h2 class="reveal d1">Watch TranslateCat in 45 seconds.</h2>
+  <div class="reveal d2 filmwrap"><video id="filmvid" src="video/translatecat.mp4" poster="video/poster.jpg" controls playsinline preload="metadata"></video></div>
+ </div></section>
+
+<!-- 2 Problem -->
+<section data-bg="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=80">
+ <div class="glass split">
+  <div><div class="eyebrow reveal">The problem</div><h2 class="reveal d1">Travel shouldn't feel like charades.</h2>
+  <p class="reveal d2">Passing a phone back and forth kills the conversation. Translation apps show text to only one person, and nobody remembers what was said afterwards.</p></div>
+  <img class="photo reveal d3" style="height:360px;object-fit:cover" src="https://images.unsplash.com/photo-1526772662000-3f88f10405ff?w=1000&q=80" alt="Travelers in a city">
+ </div></section>
+
+<!-- 3 The pose -->
+<section data-bg="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1920&q=80">
+ <div class="glass split">
+  <div><div class="eyebrow reveal">The big idea</div><h2 class="reveal d1">Two displays. One conversation.</h2>
+  <p class="reveal d2">Stand the Duo up like a tiny laptop on the café table. The <b>inner display</b> faces you with the full conversation. The <b>outer display</b> faces them with big, live captions in their language, flipped the right way up.</p>
+  <div class="reveal d3"><span class="pill">Inner display → you</span><span class="pill">Outer display → them</span></div></div>
+  <div class="reveal d2"><img class="photo" src="img/laptop.jpg" alt="iPhone Duo standing in laptop pose"><div class="cap">Laptop pose: inner display faces you, outer display faces them</div></div>
+ </div></section>
+
+<!-- 5 Features -->
+<section data-bg="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=1920&q=80">
+ <div class="glass"><div class="eyebrow reveal">Features</div><h2 class="reveal d1">Everything in the bag</h2>
+ <div class="grid">
+  <div class="card reveal d1"><svg><use href="#mic"/></svg><b>Live Speech</b><p>Streaming recognition translates while you're still talking.</p></div>
+  <div class="card reveal d1"><svg><use href="#ear"/></svg><b>Auto Listener</b><p>Hears English or Spanish and picks the direction on its own.</p></div>
+  <div class="card reveal d2"><svg><use href="#cat"/></svg><b>Outer‑Display Captions</b><p>Big serif captions for the other person, shown with the outer camera live.</p></div>
+  <div class="card reveal d2"><svg><use href="#keyboard"/></svg><b>Type a Line</b><p>Somewhere quiet? Type as “Me” or “Them” and translate instantly.</p></div>
+  <div class="card reveal d3"><svg><use href="#book"/></svg><b>Conversation Notes</b><p>Every chat is saved with AI‑written notes and your own memo.</p></div>
+  <div class="card reveal d3"><svg><use href="#sparkles"/></svg><b>Travel Help</b><p>On‑device Apple Intelligence chat for phrases and plans, read aloud.</p></div>
+ </div></div></section>
+
+<!-- 6 Sheets -->
+<section data-bg="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&q=80">
+ <div class="glass" style="max-width:1300px">
+  <div style="text-align:center;margin-bottom:26px"><div class="eyebrow reveal">Native iOS UI</div><h2 class="reveal d1">Notes and travel help, one tap away</h2></div>
+  <div class="devices reveal d2">
+   <div><div class="scale o"><div class="frame outer"><div class="glassbez"><div class="disp app" style="background:#e5e1d6">
+     <div class="cam"></div>
+     <div class="sheet" style="right:66px">
+      <h4>Conversation Notes</h4>
+      <div class="row"><b>Hi! Where's the train station?</b><small>Today, 2:14 PM · 3 turns</small></div>
+      <div class="lbl">CLEAR NOTES</div>
+      <div class="row" style="line-height:1.45">Station is two blocks away, on the left. Asked for directions in Spanish; conversation was friendly.</div>
+      <div class="lbl">EARLIER</div>
+      <div class="row"><b>¿Cuánto cuesta el menú?</b><small>Yesterday · 8 turns</small></div>
+     </div>
+     <div class="rail" style="top:48px"><div class="status">9:41</div></div>
+   </div></div></div></div><div class="devlabel">Conversation Notes</div></div>
+   <div><div class="scale o"><div class="frame outer"><div class="glassbez"><div class="disp app" style="background:#e5e1d6">
+     <div class="cam"></div>
+     <div class="sheet" style="right:66px">
+      <h4>Travel Help</h4>
+      <div class="lbl" style="text-align:right">YOU</div>
+      <div class="msg u">How do I politely ask for the bill in Spain?</div>
+      <div class="lbl">TRAVEL HELP</div>
+      <div class="msg a">Say <b>“La cuenta, por favor.”</b> In Spain the waiter usually waits for you to ask, so it's not rude.</div>
+      <div style="font-size:12px;color:#2e5a4a;display:flex;gap:5px;align-items:center"><svg width="14" height="14"><use href="#speaker"/></svg>Read aloud</div>
+     </div>
+     <div class="rail" style="top:48px"><div class="status">9:41</div></div>
+   </div></div></div></div><div class="devlabel">Travel Help · on device</div></div>
+  </div>
+ </div></section>
+
+<!-- 7 Tech -->
+<section data-bg="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80">
+ <div class="glass split">
+  <div><div class="eyebrow reveal">Under the hood</div><h2 class="reveal d1">Private by default, smart when needed.</h2>
+  <ul class="reveal d2" style="padding-left:20px">
+   <li>Apple <b>Translation</b> framework, on device</li>
+   <li><b>Foundation Models</b> for notes & travel help</li>
+   <li><b>Gemini</b> fallback for tricky translations</li>
+   <li>SwiftUI <b>ArrangementView</b> + outer‑display <b>scene accessory</b></li></ul></div>
+  <div class="reveal d3"><div class="eyebrow">8 languages</div>
+   <span class="pill">English</span><span class="pill">Spanish</span><span class="pill">French</span><span class="pill">German</span><span class="pill">Japanese</span><span class="pill">Chinese</span><span class="pill">Korean</span><span class="pill">Portuguese</span></div>
+ </div></section>
+
+<!-- 8 Thanks -->
+<section data-bg="https://images.unsplash.com/photo-1519052537078-e6302a4968d4?w=1920&q=80">
+ <div class="glass" style="text-align:center"><div class="eyebrow reveal">Thanks!</div>
+ <h1 class="reveal d1">Meow you understand.</h1>
+ <p class="reveal d2" style="margin-top:16px">TranslateCat for iPhone Duo. Conversations without borders.</p></div></section>
+
+<div class="catlane"><div class="cat idle" id="cat"><div class="speech" id="say">Hola! 👋</div>
+<svg viewBox="0 0 120 70"><g class="catbody">
+ <path class="tail" d="M20 32 Q2 20 8 4" stroke="#f4a261" stroke-width="7" fill="none" stroke-linecap="round"/>
+ <rect class="leg" x="28" y="42" width="8" height="22" rx="4" fill="#e08a45"/><rect class="leg b" x="40" y="42" width="8" height="22" rx="4" fill="#f4a261"/>
+ <rect class="leg b" x="74" y="42" width="8" height="22" rx="4" fill="#e08a45"/><rect class="leg" x="86" y="42" width="8" height="22" rx="4" fill="#f4a261"/>
+ <ellipse cx="60" cy="38" rx="42" ry="17" fill="#f4a261"/>
+ <circle cx="98" cy="26" r="16" fill="#f4a261"/><path d="M86 16 L88 0 L98 12 Z M102 12 L112 0 L112 18 Z" fill="#f4a261"/>
+ <circle cx="98" cy="24" r="2.5" fill="#222"/><circle cx="107" cy="24" r="2.5" fill="#222"/><path d="M101 30 q2 2 4 0" stroke="#222" fill="none"/>
+</g></svg></div></div>
+
+<script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/addons/"}}</script>
+<script type="module" src="duo3d.js"></script>
+<script>
+const secs=[...document.querySelectorAll('section')],bg=document.getElementById('bg'),dots=document.getElementById('dots');
+secs.forEach((s,i)=>{s.id ||= `slide-${i+1}`;const a=document.createElement('a');a.href='#'+s.id;a.setAttribute('aria-label',s.querySelector('h1,h2')?.textContent || `Slide ${i+1}`);a.onclick=e=>{e.preventDefault();s.scrollIntoView()};dots.appendChild(a)});
+const says=['Scroll to unfold ↓','Hola! 👋','Hard to talk abroad…','Stand me up!','So many features ✨','Notes & tips 📝','Private & smart 🔒','Miau! 🐾'];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');const i=secs.indexOf(e.target);[...dots.children].forEach((d,j)=>{d.classList.toggle('on',j==i);if(j==i)d.setAttribute('aria-current','step');else d.removeAttribute('aria-current')});document.getElementById('say').textContent=says[i];}}),{rootMargin:'-45% 0px -45% 0px'});
+secs.forEach(s=>io.observe(s));
+const cat=document.querySelector('.catlane .cat');let last=scrollY,t;
+function move(){const max=document.body.scrollHeight-innerHeight,p=max?scrollY/max:0;document.getElementById('prog').style.width=p*100+'%';cat.style.left=`${Math.min(1,Math.max(0,p))*Math.max(0,innerWidth-180)}px`;cat.classList.toggle('flip',scrollY<last);cat.classList.remove('idle');last=scrollY;clearTimeout(t);t=setTimeout(()=>cat.classList.add('idle'),250)}
+addEventListener('scroll',move);move();
+
+</script></body></html>

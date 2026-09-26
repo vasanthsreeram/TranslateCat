@@ -1,0 +1,11 @@
+{
+  "name": "translatecat",
+  "account_id": "7efeb52ec5727a903edd8ef7ae8eb925",
+  "compatibility_date": "2026-09-27",
+  "assets": {
+    "directory": "./slides"
+  },
+  "routes": [
+    { "pattern": "translatecat.vasanth.cloud", "custom_domain": true }
+  ]
+}

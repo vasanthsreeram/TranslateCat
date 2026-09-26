@@ -1,0 +1,76 @@
+name: TranslateCat
+options:
+  bundleIdPrefix: app.bitrighackyc
+  deploymentTarget:
+    iOS: "27.1"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+configFiles:
+  Debug: Config.xcconfig
+  Release: Config.xcconfig
+
+packages:
+  RevenueCat:
+    url: https://github.com/RevenueCat/purchases-ios-spm.git
+    from: 5.91.0
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1"
+    IPHONEOS_DEPLOYMENT_TARGET: "27.1"
+
+targets:
+  TranslateCat:
+    type: application
+    platform: iOS
+    deploymentTarget: "27.1"
+    sources:
+      - path: TranslateCat
+        excludes:
+          - Info.plist
+    dependencies:
+      - package: RevenueCat
+        product: RevenueCat
+      - package: RevenueCat
+        product: RevenueCatUI
+    info:
+      path: TranslateCat/Info.plist
+      properties:
+        CFBundleDisplayName: TranslateCat
+        CFBundleName: TranslateCat
+        UILaunchScreen: {}
+        UIRequiresFullScreen: true
+        UIApplicationSupportsMultipleScenes: true
+        NSCameraUsageDescription: TranslateCat uses the front camera to keep the cover screen on while you talk face to face.
+        NSMicrophoneUsageDescription: TranslateCat uses the microphone to hear what each person says.
+        NSSpeechRecognitionUsageDescription: TranslateCat turns speech into text on this iPhone so the other person can read the translation.
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        GeminiAPIKey: $(GEMINI_API_KEY)
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.bitrighackyc.translatecat
+        PRODUCT_NAME: TranslateCat
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1"
+        SWIFT_VERSION: "5.0"
+        IPHONEOS_DEPLOYMENT_TARGET: "27.1"
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        GENERATE_INFOPLIST_FILE: "NO"
+        ENABLE_USER_SCRIPT_SANDBOXING: "YES"
+        SWIFT_STRICT_CONCURRENCY: minimal
+
+schemes:
+  TranslateCat:
+    build:
+      targets:
+        TranslateCat: all
+    run:
+      config: Debug
