@@ -1,70 +1,74 @@
 # TranslateCat
 
-A face-to-face translation prototype for iPhone Duo, built for Bitrig Hacks iPhone Duo Edition.
+**Two displays. One conversation.** A face-to-face translation prototype for the iPhone Duo concept, built for Bitrig Hacks iPhone Duo Edition.
 
-**Interactive presentation:** https://translatecat.vasanth.cloud
+![TranslateCat concept: a folded phone showing Spanish captions to one person and an English transcript to the other](slides/img/project-cover.jpg)
 
-The web presentation uses a scroll-driven 3D phone to demonstrate the concept. The native iOS app source is included in this repository; the browser presentation uses simulated conversations.
+**[Explore the interactive presentation](https://translatecat.vasanth.cloud)** · [Watch the film on YouTube](https://youtu.be/4bWRtc-qeRg) · [Run the presentation locally](#try-the-presentation) · [Build the iOS app](#build-the-ios-app)
 
-## Features
+[![Watch TranslateCat for iPhone Duo — Two Screens. One Conversation.](https://i.ytimg.com/vi/4bWRtc-qeRg/hqdefault.jpg)](https://youtu.be/4bWRtc-qeRg)
 
-- Inner-display conversation transcript and large outer-display captions for the person opposite you.
-- Hands-free utterance detection and Gemini-powered transcription, language detection, and translation between two selected languages.
-- 16 language options, language swapping, and typed input for either speaker.
-- Fold-aware SwiftUI layouts using `ArrangementView`, division-aware geometry, and an outer-display scene accessory.
-- Local conversation history, personal notes, and transcript sharing.
-- Pro summaries with a title, key points, and follow-ups, including a fold-aware recap screen.
-- RevenueCat Test Store integration for Pro purchases, restoration, and entitlement updates.
-- On-device travel assistance with Foundation Models, subject to model availability.
+*Watch the TranslateCat film on YouTube.*
 
-## Run the presentation
+> This is a prototype, not an App Store release. The web presentation demonstrates the idea with simulated conversations; the native SwiftUI app is in this repository.
 
-No build step is required. From the repository root:
+## How it works
+
+Place the phone between two people. The inner display shows the conversation to the holder; the outer display shows large translated captions to the person across from them. Choose two languages, speak naturally or type a line, and keep a transcript for later.
+
+- **Face-to-face UI:** fold-aware layouts, an outer-display scene accessory, and captions for the opposite speaker.
+- **Translation:** hands-free utterance detection with Gemini transcription, language detection, and translation; typed input and Apple Translation are also supported. There are 16 selectable languages.
+- **After the conversation:** locally saved transcripts, personal notes, sharing, and optional Pro recaps with a title, key points, and follow-ups.
+- **RevenueCat Pro:** a Test Store integration with a hosted paywall and entitlement-based access to summaries.
+
+## Try the presentation
+
+No build step or API key is needed for the browser demo:
 
 ```sh
 python3 -m http.server 8080 --directory slides
 ```
 
-Open http://localhost:8080. Scroll to unfold the phone; use the navigation dots to visit the supporting slides.
+Open **http://localhost:8080**. Scroll to unfold the 3D phone and use the navigation dots to explore the supporting slides. The presentation is separate from the iOS app and does not run live translation.
 
-## Run the iOS app
+## Build the iOS app
 
-1. Install Xcode 27.1 beta with the iPhone Duo SDK/runtime, or open the project in a compatible Bitrig environment.
-2. Create `Secrets.xcconfig` in the repository root:
+**Requirements:** Xcode 27.1 beta with the iPhone Duo SDK/runtime, or a compatible Bitrig environment. Physical-device builds need your own signing configuration. The checked-in `TranslateCat.xcodeproj` can be opened directly; `project.yml` is available if you prefer XcodeGen.
+
+1. Create a local `Secrets.xcconfig` in the repository root:
 
    ```xcconfig
-   GEMINI_API_KEY = your_gemini_api_key
+   GEMINI_API_KEY = your_own_gemini_api_key
    ```
 
-3. Open `TranslateCat.xcodeproj`, select the TranslateCat scheme and a supported iPhone Duo simulator/device, and build. Physical-device builds also require your own signing configuration.
-4. Grant microphone and camera permissions. On-device features require supported models to be installed and available.
+2. Open `TranslateCat.xcodeproj`, select the **TranslateCat** scheme and a supported iPhone Duo simulator or device, then build and run.
+3. Grant microphone and camera permissions when prompted. Apple Translation and Foundation Models features depend on the device, runtime, downloaded language packs, and model availability.
 
-`Config.xcconfig` optionally includes `Secrets.xcconfig`, which is excluded from Git. A missing key produces an actionable error for online translation. The RevenueCat key in `SubscriptionModel.swift` is a public client SDK Test Store key; production requires your own RevenueCat/App Store configuration. The Pro entitlement is `translatecat_pro`.
+`Config.xcconfig` optionally includes the Git-ignored `Secrets.xcconfig`. Without a Gemini key, online translation reports a setup error; typed translation can fall back to Apple Translation when supported. This prototype calls Gemini directly from the app, so even a key supplied through build configuration can be extracted from a distributed binary. **Do not ship it that way:** put Gemini behind an authenticated server-side proxy for production and never commit credentials.
 
-`project.yml` is also provided for XcodeGen users. The checked-in Xcode project can be used directly.
+## RevenueCat integration
 
-## Data and prototype limitations
+The native app uses the RevenueCat iOS SDK and RevenueCatUI:
 
-Conversations and notes are saved locally. The hands-free path sends speech audio to Gemini; Gemini summaries send transcript text. Recorded audio is not retained by the app. Apple Translation and Foundation Models availability varies by device and runtime. This prototype requires internet access for its Gemini features.
+| Capability | Implementation |
+| --- | --- |
+| Test Store SDK configuration | `SubscriptionModel.swift` configures `Purchases` with a **public client-side Test Store key**. It is not a RevenueCat secret API key. |
+| Offerings and packages | Loads the current offering and exposes its available packages; a custom purchase method is implemented. |
+| Hosted paywall | `RevenueCatUI.PaywallView` opens from Pro upsells and closes after a successful Pro purchase or restore. |
+| Purchases and restore | Uses `purchase(package:)` and `restorePurchases()`; surfaces cancellation and common purchase errors. |
+| Entitlement gating | Observes `customerInfoStream` and checks the `translatecat_pro` entitlement to unlock conversation summaries. |
 
-A key embedded through build configuration is still extractable from the compiled app. Use a server-side authenticated proxy before distributing a production app, and rotate demo credentials after the event. Never commit `Secrets.xcconfig` or API tokens.
+The source anticipates monthly, yearly, and lifetime packages, but the actual products and prices depend on the RevenueCat dashboard offering. This repository does **not** verify which packages are configured or prove a completed purchase. Shipping requires your own App Store products, RevenueCat production configuration, and an appropriate public App Store SDK key. Never put a RevenueCat **secret** API key in an iOS app.
 
-## Deploy the presentation
+## Data and limitations
 
-Install Wrangler v4 and authenticate with a Cloudflare account that manages the domain, then run:
+Conversations and notes are saved locally on the device; the app does not retain recorded audio. The hands-free path sends speech audio to Gemini, and online recap generation sends transcript text and the owner's note. On-device Apple Translation and Foundation Models paths depend on supported hardware, runtime, and downloaded models. The browser presentation uses simulated conversations.
 
-```sh
-wrangler deploy
-```
+## Repository map
 
-`wrangler.jsonc` publishes only `slides/` and attaches `translatecat.vasanth.cloud`. To deploy a fork, update the account, Worker name, and custom domain in that configuration.
+- [`TranslateCat/`](TranslateCat/) — SwiftUI app, speech and translation flows, local history, recaps, and RevenueCat integration.
+- [`TranslateCat.xcodeproj/`](TranslateCat.xcodeproj/) and [`project.yml`](project.yml) — Xcode project and XcodeGen source.
+- [`slides/`](slides/) — interactive presentation, Three.js scene, video, and images.
+- [`wrangler.jsonc`](wrangler.jsonc) — Cloudflare deployment configuration for the presentation.
 
-## Repository layout
-
-- `TranslateCat/`: SwiftUI app, translation, speech capture, summaries, and subscriptions.
-- `TranslateCat.xcodeproj/`: Xcode project.
-- `slides/`: light-theme presentation, Three.js demo, and image assets.
-- `project.yml`: XcodeGen configuration.
-- `wrangler.jsonc`: static-site deployment configuration.
-
-The bundled Three.js files use the MIT license; see `slides/vendor/LICENSE`.
+The bundled Three.js files carry an MIT license; see [`slides/vendor/LICENSE`](slides/vendor/LICENSE). To deploy the presentation to your own domain, update the Worker account, name, and custom domain in `wrangler.jsonc`, then run `wrangler deploy` with Wrangler v4 and the relevant Cloudflare account.

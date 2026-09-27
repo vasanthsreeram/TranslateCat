@@ -127,7 +127,8 @@ a:focus-visible{outline:3px solid #0071e3;outline-offset:4px}
 @media(max-height:650px) and (min-width:601px){.captions{top:45%;width:32vw;left:6vw;transform:translateY(-50%)}.cap3d,.cap3d.on{transform:translateY(-50%)}.cap3d h2{font-size:30px}.cap3d p{font-size:15px}#stage{inset:0 0 0 35%}.hint{bottom:22px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.cap3d{transition:none}.leg,.tail,.catbody{animation:none}}
 .filmwrap{margin-top:26px;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.09);border:1px solid rgba(0,0,0,.07);background:#fff}
-.filmwrap video{display:block;width:100%;aspect-ratio:16/9}
+.filmwrap iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.filmlink{display:inline-block;margin-top:18px;color:var(--accent);font-size:16px;font-weight:600;text-underline-offset:4px}
 </style></head><body>
 
 <!-- SF Symbol–style icons -->
@@ -177,12 +178,13 @@ a:focus-visible{outline:3px solid #0071e3;outline-offset:4px}
   <div class="reveal d2"><img class="photo" src="img/hero.jpg" alt="iPhone Duo opened, held in two hands"><div class="cap">iPhone Duo · 7.6″ inner · 5.4″ outer display</div></div>
  </div></section>
 
-<!-- 1b Launch film -->
+<!-- Film -->
 <section id="film" data-bg="https://images.unsplash.com/photo-1511920170033-f8396924c348?w=1920&q=80">
  <div class="glass" style="max-width:1320px;text-align:center">
-  <div class="eyebrow reveal">The launch film</div>
-  <h2 class="reveal d1">Watch TranslateCat in 45 seconds.</h2>
-  <div class="reveal d2 filmwrap"><video id="filmvid" src="video/translatecat.mp4" poster="video/poster.jpg" controls playsinline preload="metadata"></video></div>
+  <div class="eyebrow reveal">The film</div>
+  <h2 class="reveal d1">Two screens. One conversation.</h2>
+  <div class="reveal d2 filmwrap"><iframe src="https://www.youtube-nocookie.com/embed/4bWRtc-qeRg" title="TranslateCat for iPhone Duo — Two Screens. One Conversation." loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+  <a class="filmlink reveal d3" href="https://youtu.be/4bWRtc-qeRg" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a>
  </div></section>
 
 <!-- 2 Problem -->
